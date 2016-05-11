@@ -1,12 +1,12 @@
-Участники:
+п»їРЈС‡Р°СЃС‚РЅРёРєРё:
 
-Дзюба Влад: presentator, team-lead
-Махров Антон: android developer, project manager
-Кочетов Даннил: front-end, UI/UX
-Комар Андрей: back-end, databases
+Р”Р·СЋР±Р° Р’Р»Р°Рґ: presentator, team-lead
+РњР°С…СЂРѕРІ РђРЅС‚РѕРЅ: android developer, project manager
+РљРѕС‡РµС‚РѕРІ Р”Р°РЅРЅРёР»: front-end, UI/UX
+РљРѕРјР°СЂ РђРЅРґСЂРµР№: back-end, databases
 
-Идея проекта:
-Идея пока отсутсвует.
+РРґРµСЏ РїСЂРѕРµРєС‚Р°:
+РРґРµСЏ РїРѕРєР° РѕС‚СЃСѓС‚СЃРІСѓРµС‚.
 
-Делегат:
-Дзюба Влад, dzyubavlad@gmail.com 
+Р”РµР»РµРіР°С‚:
+Р”Р·СЋР±Р° Р’Р»Р°Рґ, dzyubavlad@gmail.com 
