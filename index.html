@@ -5,15 +5,20 @@
 				<td>
 					<b>Номер заказа: </b>{{order.id}}<br>
 					<span class='order-body'>
-						<ol>
-							<li ng-repeat='product in order.products'>
-								{{product.info.name}} – {{product.count}} шт.
-							</li>
-						</ol>
+						<table class='table table-bordered table-responsive table-condensed'>
+							<tr ng-repeat='product in order.products'>
+								<td>{{product.info.name}}</td>
+								<td>{{product.info.cost}} грн/шт.</td>
+								<td>{{product.count}} шт.</td>
+							</tr>
+						</table>
+						Всего: <b>{{order.total}} грн</b>
 					</span>
 				</td>
-				<td>{{order.order_time}}</td>
-				<td>{{order.prepare_time}}</td>
+				<td>{{$parent.getTime(order.order_time)}}</td>
+				<td>{{$parent.getTime(order.prepare_time)}}
+					<span ng-if='!expired'>(через {{timeLeft}})</span>
+				</td>
 			</tr>
 		</script>
 		<meta charset='utf-8' />
@@ -35,7 +40,7 @@
 						<span class='time pull-right'>{{curTime}}</span>
 					</h3>
 				</div>
-				<table ng-if='orders.length>0' class='table table-responsive table-striped table-hovered panel-body'>
+				<table ng-if='orders.length>0' class='table table-responsive table-striped table-hover panel-body'>
 					<tr>
 						<th>Детали заказа</th>
 						<th>Когда заказали</th>
