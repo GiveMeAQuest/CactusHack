@@ -1,15 +1,16 @@
 <html ng-app='app'>
 	<head>
 		<script type='text/ng-template' id='order.html'>
-			<tr>
+			<tr ng-click='showDetails=!showDetails'>
 				<td>
 					<b>Номер заказа: </b>{{order.id}}<br>
-					<b>Список продуктов:</b><br>
-					<ol>
-						<li ng-repeat='product in order.products'>
-							{{product.info.name}} – {{product.count}} шт.
-						</li>
-					</ol>
+					<span class='order-body'>
+						<ol>
+							<li ng-repeat='product in order.products'>
+								{{product.info.name}} – {{product.count}} шт.
+							</li>
+						</ol>
+					</span>
 				</td>
 				<td>{{order.order_time}}</td>
 				<td>{{order.prepare_time}}</td>
@@ -42,7 +43,10 @@
 					</tr>
 					<tr order ng-repeat='order in orders' data='order' />
 				</table>
-				<div ng-if='orders.length==0' class='panel-body'>
+				<div ng-if='loading' class='panel-body'>
+				<h4 class='text-center'>Загрузка...</h4>
+				</div>
+				<div ng-if='!loading&&orders.length==0' class='panel-body'>
 					<h4 class='text-center'>Невыполненных заказов нет</h4>
 				</div>
 			</div>

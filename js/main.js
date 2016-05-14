@@ -4,6 +4,8 @@ var SERVERIP = 'http://10.55.33.11:8080/';
 
 app.controller('mainCtrl', function($scope, $http, $timeout, $interval){
 
+	$scope.loading = true;
+
 	$scope.orders = $scope.products = [];
 
 	setTime = function(){
@@ -34,8 +36,19 @@ app.controller('mainCtrl', function($scope, $http, $timeout, $interval){
 				return order;
 			});
 
+			var newItems = response.data.orders.filter(function(order){
+				for (var i in $scope.orders)
+					if ($scope.orders[i].id == order.id)
+						return false;
+				return true;
+			});
+
 			$timeout(function(){
-				$scope.orders = response.data.orders;
+				for (var i in newItems){
+					$scope.orders.push(newItems[i]);
+				}
+				if ($scope.loading)
+					$scope.loading = false;
 			});
 		});
 	}
