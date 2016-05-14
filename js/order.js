@@ -26,7 +26,7 @@ app.directive('order', function($interval){
 		(function(body){
 			scope.$watch('showDetails', function(to, from){
 				if (from != to)
-					body.slideToggle();
+					body.slideToggle(300);
 			});
 		})(body);
 	}
