@@ -1,4 +1,4 @@
-app = angular.module('app', []);
+app = angular.module('app', ['ui.bootstrap']);
 
 var SERVERIP = 'http://10.55.33.11:8080/';
 
@@ -77,6 +77,12 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 				for (var i in newItems){
 					$scope.orders.push(newItems[i]);
 				}
+				$scope.orders = $scope.orders.filter(function(order){
+					for (var i in response.data.orders)
+						if (response.data.orders[i].id == order.id)
+							return true;
+					return false;
+				});
 				if ($scope.loading)
 					$scope.loading = false;
 			});

@@ -1,8 +1,24 @@
-app.directive('order', function($interval){
+app.directive('order', function($interval, $uibModal){
 
 	link = function(scope, el, attrs){
 
-		scope.showDetails = scope.expired = false;
+		scope.expired = false;
+
+		el.click(function(){
+			var modal = $uibModal.open({
+				templateUrl: 'modal.html',
+				size: 'sm',
+				resolve: {
+					order: scope.order
+				},
+				controller: function($scope, $uibModalInstance, order){
+					$scope.order = order;
+					$scope.close = function(){
+						$uibModalInstance.close();
+					}
+				}
+			});
+		});
 
 		checkExpired = function(){
 			scope.timeLeft = scope.$root.timeDiff(scope.order.prepare_time);
@@ -15,29 +31,14 @@ app.directive('order', function($interval){
 
 		el.css({
 			cursor: 'pointer'
-		})
-
-		body = el.find('.order-body');
-
-		body.css({
-			display: 'none'
 		});
-
-		(function(body){
-			scope.$watch('showDetails', function(to, from){
-				if (from != to)
-					body.slideToggle(300);
-			});
-		})(body);
 	}
 
 	return {
 		restrict: 'A',
-		replace: true,
 		link: link,
 		scope: {
-			order: '=data',
-			timeDiff: '=timeDiff'
+			order: '=data'
 		},
 		templateUrl: 'order.html'
 	}

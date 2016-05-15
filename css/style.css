@@ -12,5 +12,6 @@ body {
 }
 
 .order-body {
+	position: absolute;
 	width: 100%;
 }
