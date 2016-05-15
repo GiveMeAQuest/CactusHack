@@ -10,7 +10,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 
 	$rootScope.timeDiff = $scope.timeDiff = function(end){
 		var begin = new Date(Date.now());
-		var end = new Date(end);
+		var end = new Date(end.replace(' ', 'T'));
 		var diff = end - begin;
 		with (Math){
 			diff = floor(diff / 1000);
@@ -25,7 +25,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 	$rootScope.getTime = $scope.getTime = function(date){
 		if (!date)
 			date = new Date();
-		else date = new Date(date);
+		else date = new Date(date.replace(' ', 'T'));
 
 		return date.toLocaleString('ru', 
 			{
