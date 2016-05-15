@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 from django.contrib import admin
 
@@ -16,3 +17,9 @@ urlpatterns = patterns('',
     url(r'^products/', ProductsView.as_view(), name='products'),
     url(r'^login/(?P<name>.+)/$', LoginView.as_view(), name='login'),
 )
+
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))

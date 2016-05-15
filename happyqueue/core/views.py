@@ -14,6 +14,8 @@ orders = {'orders': []}
 
 users = {'users': []}
 
+names = {'1': 'Hamburger', '2': 'Hot-Dog', '3': 'Double Hamburger', '4': 'Pancakes', '5': 'Chicken Chop'}
+
 
 class IndexView(TemplateView):
     template_name = 'base.html'
@@ -44,6 +46,7 @@ class OrdersView(UpdateView):
             d = {}
             d['id'] = i[0]
             d['count'] = i[1]
+            d['name'] = names.get(str(i[0]))
             products.append(d)
         current_order['products'] = products
         current_order['user'] = request.POST.get('username')[0]
@@ -55,12 +58,12 @@ class ProductsView(TemplateView):
 
     products = {'products': [
         {'id': 1,
-         'cost': 100,
+         'cost': 35,
          'name': 'Hamburger',
          'image': settings.URL + static('images/1.png'),
          'height': 2880,
          'width': 1800}, {'id': 2,
-                          'cost': 200,
+                          'cost': 11,
                           'name': 'Hot-Dog',
                           'image': settings.URL + static('images/2.jpg'),
                           'height': 554,
