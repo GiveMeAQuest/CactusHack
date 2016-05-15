@@ -7,7 +7,7 @@ app.directive('order', function($interval, $uibModal){
 		el.click(function(){
 			var modal = $uibModal.open({
 				templateUrl: 'modal.html',
-				size: 'sm',
+				size: 'lg',
 				resolve: {
 					order: scope.order
 				},
