@@ -9,6 +9,10 @@ body {
 .time {
 	padding-top: 5px;
 	font-size: small;
+	font-weight: bold;
+	position: absolute;
+	top: 25px;
+	right: 25px;
 }
 
 .order-body {

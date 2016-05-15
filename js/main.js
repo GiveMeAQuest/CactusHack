@@ -11,7 +11,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 	$scope.filterMode = 'all';
 
 	$scope.getFilter = function(order){
-		//console.log($scope.filterMode);
 		switch ($scope.filterMode){
 			case 'all':
 				return true;
@@ -20,6 +19,19 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 			case 'complete':
 				return order.completed == true;
 		}
+	}
+
+	$scope.searchBox = function(order){
+		/*var key = $scope.searchFilter;
+		if (key == '') return true;
+		var props = Object.keys(order);
+		for (var prop in props){
+			console.log(order[props[prop]].toString());
+			if (order[props[prop]].toString().indexOf(key) >= 0)
+				return true;
+		}
+		return false;*/
+		return order.toString().indexOf($scope.searchFilter) >= 0;
 	}
 
 	$rootScope.timeDiff = $scope.timeDiff = function(end){

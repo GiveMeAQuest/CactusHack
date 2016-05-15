@@ -53,13 +53,24 @@
 			<h1 class='text-center'>Happy Cake Online</h1>
 			<div class='panel panel-default'>
 				<div class='panel-heading'>
+				<form class='form-inline'>
 					<h3 class='text-center'>Заказы
-						<div class='btn-group'>
-							<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"all"'>Все</button>
-							<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"incomplete"'>Незавершённые</button>
-							<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"complete"'>Завершённые</button>
+					
+						<div class='form-group'>
+							<div class='btn-group'>
+								<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"all"'>Все</button>
+								<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"incomplete"'>Незавершённые</button>
+								<button class='btn btn-primary' ng-model='filterMode' uib-btn-radio='"complete"'>Завершённые</button>
+							</div>
 						</div>
-						<span class='time pull-right'>{{curTime}}</span>
+						<div class='form-group has-feedback'>
+							<input type='text' ng-model='searchFilter' class='form-control input-sm' placeholder='Поиск по заказам'>
+							<small class='glyphicon glyphicon-search form-control-feedback'></small>
+						</div>
+						<div class='form-group'>
+							<span class='time'>{{curTime}}</span>
+						</div>
+					</form>
 					</h3>
 				</div>
 				<table ng-if='orders.length>0' class='table table-responsive table-hover panel-body'>
@@ -69,7 +80,7 @@
 						<th>Когда заказали</th>
 						<th>Когда заберут</th>
 					</tr>
-					<tr order ng-repeat='order in orders | orderBy : "completed" | filter : getFilter' data='order'  ng-class='{"success": order.completed}' />
+					<tr order ng-repeat='order in orders | orderBy : "completed" | filter : getFilter | filter : searchFilter' data='order'  ng-class='{"success": order.completed}' />
 				</table>
 				<div ng-if='loading' class='panel-body'>
 				<h4 class='text-center'>Загрузка...</h4>
