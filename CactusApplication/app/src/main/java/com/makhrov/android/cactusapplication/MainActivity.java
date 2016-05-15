@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -92,8 +91,10 @@ public class MainActivity extends BaseActivity {
         String USER_NAME_PATTERN = "[0-9a-zA-Z_\\\\-]*";
 
         if(TextUtils.isEmpty(userName)) {
+            authEdit.setError("This field is required!");
             return false;
         } else if(!userName.matches(USER_NAME_PATTERN)) {
+            authEdit.setError("Wrong username format!");
             return false;
         } else {
             return true;

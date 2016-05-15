@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:text="Preview Name Test"
                 android:textStyle="bold"/>
 
@@ -44,6 +44,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_toRightOf="@id/product_name_view"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:id="@+id/product_price_view"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -55,11 +56,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:paddingLeft="8dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:textColor="@android:color/black"
             android:id="@+id/product_count_view"
             android:gravity="center"
             android:textSize="24sp"
@@ -70,6 +73,7 @@
             android:text="х5"/>
 
         <Button
+            android:background="@drawable/rounded_login_button"
             android:id="@+id/delete_product_button"
             android:text="Delete"
             android:layout_width="wrap_content"

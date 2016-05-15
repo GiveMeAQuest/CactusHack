@@ -15,7 +15,7 @@
         android:id="@+id/login_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Ordering App" />
 
     <LinearLayout
         android:layout_centerVertical="true"
@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:singleLine="true"
-            android:background="@android:color/transparent"/>
+            android:singleLine="true"/>
 
         <Button
+            android:layout_margin="25dp"
             android:id="@+id/login_button"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"

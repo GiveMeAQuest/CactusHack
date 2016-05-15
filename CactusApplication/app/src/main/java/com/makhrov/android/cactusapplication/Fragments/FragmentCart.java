@@ -1,9 +1,13 @@
 package com.makhrov.android.cactusapplication.Fragments;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DialogTitle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -44,33 +50,44 @@ import rx.functions.Action1;
 public class FragmentCart extends android.support.v4.app.Fragment {
 
 
-    public CartProductsAdapter productsAdapter;
+    public static CartProductsAdapter productsAdapter;
+
+
+    int myHour = 14;
+    int myMinute = 35;
 
     public TextView totalTextView;
-    ApiService apiService;
-    Api api;
+    TimePicker timePicker;
+    static ApiService apiService;
+    static Api api;
 
     @OnClick(R.id.order_button)
     public void onOrderClick(){
+
+        getActivity().showDialog(0);
+    }
+
+    public static void dich(int myHour, int myMinute){
         String counts = "";
         String ids = "";
         for(Product p : productsAdapter.products){
             ids += (String.valueOf(p.getId())) + " ";
             counts += (String.valueOf(p.getInCart())) + " ";
         }
-        apiService.makeOrder(OrderActivity.username,"",counts,ids).subscribe(new Action1<Order>() {
-            @Override
-            public void call(Order order) {
-                System.out.println(order.getId().toString());
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-                return;
-            }
-        });
+        System.out.println("something");
+        apiService.makeOrder(OrderActivity.username,myHour + ":" + myMinute,counts,ids)
+                .subscribe(new Action1<Order>() {
+                    @Override
+                    public void call(Order order) {
+                        Toast.makeText(OrderActivity.self,"Your order approved",Toast.LENGTH_SHORT).show();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        return;
+                    }
+                });
     }
-    public static CartProductsAdapter cartProductsAdapter;
 
     @Nullable
     @Override

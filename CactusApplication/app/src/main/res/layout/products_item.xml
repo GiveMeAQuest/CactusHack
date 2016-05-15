@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="Preview Name Test"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -47,6 +48,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textColor="@android:color/black"
                 android:text="Preview Price Test: 100000$"
                 android:textSize="25sp"/>
         </LinearLayout>

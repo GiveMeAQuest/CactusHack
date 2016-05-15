@@ -1,6 +1,8 @@
 package com.makhrov.android.cactusapplication;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
@@ -140,4 +143,16 @@ public class OrderActivity extends BaseActivity {
 
         alertDialog.show();
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        TimePickerDialog tpd = new TimePickerDialog(this, myCallBack, 14, 6, true);
+        return tpd;
+    }
+
+    TimePickerDialog.OnTimeSetListener myCallBack = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            FragmentCart.dich(hourOfDay,minute);
+        }
+    };
 }
