@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import datetime
+import os
 
 from django.conf import settings
 from django.shortcuts import render
@@ -32,8 +33,12 @@ class OrdersView(UpdateView):
         prod_info = zip(prod_ids, count)
         current_order = {}
         current_order['id'] = len(orders['orders']) + 1
-        current_order['order_time'] = datetime.utcnow()
-        current_order['prepare_time'] = request.POST.get('prepare_time')
+        current_order['order_time'] = datetime.datetime.utcnow()
+        time = request.POST.get('prepare_time').split(':')
+        dtime = datetime.time(int(time[0]), int(time[1]))
+        datetime_cur = datetime.datetime.combine(datetime.datetime.now().date(), dtime)
+        current_order['prepare_time'] = datetime_cur.strftime("%Y-%m-%d %H:%M:%S")
+        current_order['access_token'] = os.urandom(4).encode('hex')
         products = []
         for i in prod_info:
             d = {}
@@ -85,6 +90,7 @@ class ProductsView(TemplateView):
 
 class LoginView(TemplateView):
     def get(self, request, *args, **kwargs):
-        current_user = {'id': len(users['users']) + 1, 'name': kwargs['name']}
+        current_user = {'id': len(users['users']) + 1, 'name': kwargs['name'],
+        }
         users['users'].append(current_user)
         return JsonResponse(current_user, safe=False)
