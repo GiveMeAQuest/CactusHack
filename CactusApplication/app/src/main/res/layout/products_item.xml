@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:padding="4dp"
+    android:background="#F5F5DC">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+        android:background="@drawable/rounded_product_item">
+
+        <ImageView
+            android:id="@+id/product_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+
+        <ProgressBar
+            android:layout_above="@id/product_image_view"
+            android:id="@+id/preview_progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/product_image_view"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/product_name_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Preview Name Test"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_toRightOf="@id/product_name_view"
+                android:textAlignment="center"
+                android:id="@+id/product_price_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Preview Price Test: 100000$"
+                android:textSize="25sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
