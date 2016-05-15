@@ -49,7 +49,7 @@ class OrdersView(UpdateView):
             d['name'] = names.get(str(i[0]))
             products.append(d)
         current_order['products'] = products
-        current_order['user'] = request.POST.get('username')[0]
+        current_order['user'] = request.POST.get('username')
         orders['orders'].append(current_order)
         return JsonResponse(current_order, safe=False)
 

@@ -1,3 +1,4 @@
+from itertools import chain, izip_longest
 import urllib, cStringIO
 from PIL import Image
 
@@ -11,3 +12,8 @@ def get_img_dimensions(url):
     if link.has_key('width'):
         width = link['width']  # set width if site modifies it
     return width, height
+
+
+def roundrobin(*iterables):
+    sentinel = object()
+    return (x for x in chain(*izip_longest(fillvalue=sentinel, *iterables)) if x is not sentinel)
