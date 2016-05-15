@@ -21,19 +21,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 		}
 	}
 
-	$scope.searchBox = function(order){
-		/*var key = $scope.searchFilter;
-		if (key == '') return true;
-		var props = Object.keys(order);
-		for (var prop in props){
-			console.log(order[props[prop]].toString());
-			if (order[props[prop]].toString().indexOf(key) >= 0)
-				return true;
-		}
-		return false;*/
-		return order.toString().indexOf($scope.searchFilter) >= 0;
-	}
-
 	$rootScope.timeDiff = $scope.timeDiff = function(end){
 		var begin = new Date(Date.now());
 		var end = new Date(end.replace(' ', 'T'));
@@ -114,7 +101,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 		$scope.products = response.data.products;
 
 		$scope.updateOrders();
-		$interval($scope.updateOrders, 5000);
+		$interval($scope.updateOrders, 2000);
 	});
 
 });
