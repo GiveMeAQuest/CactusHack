@@ -9,23 +9,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 
-orders = {'orders': [{
-    'id': 1,
-    'order_time': datetime.utcnow(),
-    'prepare_time': datetime.utcnow() + timedelta(hours=1),
-    'products': [
-        {'id': 1,
-         'count': 3}
-    ]
-}, {
-    'id': 2,
-    'order_time': datetime.utcnow(),
-    'prepare_time': datetime.utcnow() + timedelta(hours=1),
-    'products': [
-        {'id': 2,
-         'count': 1}
-    ]
-}]}
+orders = {'orders': []}
 
 users = {'users': []}
 
@@ -43,11 +27,21 @@ class OrdersView(UpdateView):
         return JsonResponse(orders, safe=False)
 
     def post(self, request, *args, **kwargs):
+        prod_ids = map(int, request.POST.get('id').strip().split(' '))
+        count = map(int, request.POST.get('count').strip().split(' '))
+        prod_info = zip(prod_ids, count)
         current_order = {}
         current_order['id'] = len(orders['orders']) + 1
         current_order['order_time'] = datetime.utcnow()
-        current_order['prepare_time'] = datetime.utcnow()
-        current_order['products'] = []
+        current_order['prepare_time'] = request.POST.get('prepare_time')
+        products = []
+        for i in prod_info:
+            d = {}
+            d['id'] = i[0]
+            d['count'] = i[1]
+            products.append(d)
+        current_order['products'] = products
+        current_order['user'] = request.POST.get('username')[0]
         orders['orders'].append(current_order)
         return JsonResponse(current_order, safe=False)
 
