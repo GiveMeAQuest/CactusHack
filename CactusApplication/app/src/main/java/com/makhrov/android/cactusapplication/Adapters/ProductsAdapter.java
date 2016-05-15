@@ -126,8 +126,4 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         }
     }
 
-    public void addAll(List<Product> videos) {
-        products.addAll(videos);
-        notifyDataSetChanged();
-    }
 }

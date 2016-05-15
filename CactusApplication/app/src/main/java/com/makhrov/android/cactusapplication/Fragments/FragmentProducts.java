@@ -57,12 +57,17 @@ public class FragmentProducts extends android.support.v4.app.Fragment {
                 .subscribe(new Action1<ProductsResponse>() {
                     @Override
                     public void call(ProductsResponse productsResponse) {
-                        productsAdapter = new ProductsAdapter(productsResponse.getProducts(),getContext(), OrderActivity.self);
+                        productsAdapter = new ProductsAdapter(productsResponse.getProducts(), getContext(), OrderActivity.self);
 //                        productsAdapter.addAll(productsResponse.getProducts());
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
                         llm.setOrientation(LinearLayoutManager.VERTICAL);
                         recyclerView.setLayoutManager(llm);
                         recyclerView.setAdapter(productsAdapter);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        return;
                     }
                 });
         return rootView;

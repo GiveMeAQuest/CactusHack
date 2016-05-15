@@ -53,21 +53,17 @@ public class FragmentCart extends android.support.v4.app.Fragment {
     public static CartProductsAdapter productsAdapter;
 
 
-    int myHour = 14;
-    int myMinute = 35;
 
-    public TextView totalTextView;
-    TimePicker timePicker;
+    public static TextView totalTextView;
     static ApiService apiService;
     static Api api;
 
     @OnClick(R.id.order_button)
     public void onOrderClick(){
-
         getActivity().showDialog(0);
     }
 
-    public static void dich(int myHour, int myMinute){
+    public static void makeOrder(int myHour, int myMinute){
         String counts = "";
         String ids = "";
         for(Product p : productsAdapter.products){
@@ -80,6 +76,8 @@ public class FragmentCart extends android.support.v4.app.Fragment {
                     @Override
                     public void call(Order order) {
                         Toast.makeText(OrderActivity.self,"Your order approved",Toast.LENGTH_SHORT).show();
+                        FragmentOrders.ordersAdapter.orders.add(order);
+                        FragmentOrders.ordersAdapter.notifyDataSetChanged();
                     }
                 }, new Action1<Throwable>() {
                     @Override

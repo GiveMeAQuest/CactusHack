@@ -3,6 +3,8 @@ package com.makhrov.android.cactusapplication.WEB.dto;
 import com.google.gson.annotations.SerializedName;
 
 
+import java.util.ArrayList;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +18,7 @@ public class Order {
     String orderTime;
     @SerializedName("prepare_time")
     String prepareTime;
-
+    @SerializedName("access_token")
+    String accessToken;
+    ArrayList<Product> products;
 }

@@ -10,26 +10,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.GsonBuilder;
-import com.makhrov.android.cactusapplication.Adapters.ProductsAdapter;
 import com.makhrov.android.cactusapplication.Fragments.FragmentCart;
+import com.makhrov.android.cactusapplication.Fragments.FragmentOrders;
 import com.makhrov.android.cactusapplication.Fragments.FragmentProducts;
 import com.makhrov.android.cactusapplication.WEB.Api;
 import com.makhrov.android.cactusapplication.WEB.ApiService;
-import com.makhrov.android.cactusapplication.WEB.dto.ProductsResponse;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by Anton on 14.05.2016.
@@ -66,6 +59,7 @@ public class OrderActivity extends BaseActivity {
 
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(sectionsPagerAdapter);
+        pager.setOffscreenPageLimit(2);
 
         username = getIntent().getExtras().get("username").toString();
         userID = getIntent().getExtras().getString("userid").toString();
@@ -89,7 +83,8 @@ public class OrderActivity extends BaseActivity {
 
         public static Fragment[] fragments = {
                 new FragmentProducts(),
-                new FragmentCart()
+                new FragmentCart(),
+                new FragmentOrders()
         };
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -152,7 +147,7 @@ public class OrderActivity extends BaseActivity {
 
     TimePickerDialog.OnTimeSetListener myCallBack = new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            FragmentCart.dich(hourOfDay,minute);
+            FragmentCart.makeOrder(hourOfDay,minute);
         }
     };
 }

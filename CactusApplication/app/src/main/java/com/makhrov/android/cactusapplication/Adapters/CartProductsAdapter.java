@@ -24,6 +24,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Builder;
+
 /**
  * Created by Anton on 14.05.2016.
  */
@@ -63,22 +65,15 @@ public class CartProductsAdapter extends RecyclerView.Adapter<CartProductsAdapte
         System.out.println("" + OrderActivity.metrics.widthPixels + " hehehe" + product.getHeight()*OrderActivity.metrics.widthPixels/product.getWidth());
         holder.productPreview.setLayoutParams(new LinearLayout.LayoutParams(OrderActivity.metrics.widthPixels,630));
 
-        holder.countView.setText(String.valueOf(product.getInCart()));
+        holder.countView.setText("x" + String.valueOf(product.getInCart()));
+
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position < products.size()) {
-                    products.remove(position);
-                    if (position == 0 && products.size() == 1) {
-                        notifyDataSetChanged();
-                        calculatePrice();
-                        return;
-                    }
-                    calculatePrice();
-                    notifyItemRemoved(position);
-                } else
-                    notifyDataSetChanged();
+                products.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, products.size());
                 calculatePrice();
             }
         });
@@ -116,7 +111,9 @@ public class CartProductsAdapter extends RecyclerView.Adapter<CartProductsAdapte
 //                alertDialog.show();
 //            }
 //        });
+//        super.bindViewHolder(holder, position);
     }
+
 
     @Override
     public int getItemCount() {
