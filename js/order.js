@@ -16,6 +16,9 @@ app.directive('order', function($interval, $uibModal){
 					$scope.close = function(){
 						$uibModalInstance.close();
 					}
+					$scope.mark = function(){
+						scope.order.completed = true;
+					}
 				}
 			});
 		});
@@ -27,7 +30,7 @@ app.directive('order', function($interval, $uibModal){
 		}
 
 		checkExpired();
-		$interval(checkExpired, 1000);
+		$interval(checkExpired, 5000);
 
 		el.css({
 			cursor: 'pointer'

@@ -8,6 +8,20 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 
 	$scope.orders = $scope.products = [];
 
+	$scope.filterMode = 'all';
+
+	$scope.getFilter = function(order){
+		//console.log($scope.filterMode);
+		switch ($scope.filterMode){
+			case 'all':
+				return true;
+			case 'incomplete':
+				return order.completed == false;
+			case 'complete':
+				return order.completed == true;
+		}
+	}
+
 	$rootScope.timeDiff = $scope.timeDiff = function(end){
 		var begin = new Date(Date.now());
 		var end = new Date(end.replace(' ', 'T'));
@@ -56,19 +70,14 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 			});
 
 			newItems = newItems.map(function(order){
+				order.total = 0;
+				order.completed = false;
 				order.products = order.products.map(function(product){
 					product.info = $scope.products.filter(function(product_info){
 						return product_info.id == product.id;
 					})[0];
-					return product;
-				});
-				return order;
-			});
-
-			newItems = newItems.map(function(order){
-				order.total = 0;
-				order.products.map(function(product){
 					order.total += product.info.cost * product.count;
+					return product;
 				});
 				return order;
 			});
