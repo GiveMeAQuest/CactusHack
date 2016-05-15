@@ -9,15 +9,17 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $timeout, $interv
 	$scope.orders = $scope.products = [];
 
 	$rootScope.timeDiff = $scope.timeDiff = function(end){
-		var begin = new Date();
+		var begin = new Date(Date.now());
 		var end = new Date(end);
-		var diff = new Date(end - begin);
-		return diff.toLocaleString('ru',
-		{
-			hour: 'numeric',
-			minute: 'numeric',
-			second: 'numeric'
-		});
+		var diff = end - begin;
+		with (Math){
+			diff = floor(diff / 1000);
+			var hours = floor(diff / 60 / 60);
+			var minutes = floor((diff % 3600) / 60);
+			var seconds = diff % 60;
+			var result = '' + floor(hours / 10) + (hours % 10) + ':' + floor(minutes / 10) + (minutes % 10) + ':' + floor(seconds / 10) + (seconds % 10);
+		}
+		return result;
 	}
 
 	$rootScope.getTime = $scope.getTime = function(date){
